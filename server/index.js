@@ -17,3 +17,53 @@ const distance = function ( data ) {
 let tester = [ [ 0, 1 ], [ 3, 4 ] ];
 
 distance( testser );
+
+const variance = function ( data ) {
+  /**
+   * let distance = -1;
+   *
+   * point at curCords
+   * point at compCords
+   * for loop over data
+   *  check data for points between cur and comp (in a rectangle)
+   *  sort long and sort lat
+   *  if ( checkLong > longMin && checkLong < longMax && checkLat > latMin && checkLat < latMax ) {
+   *    comp array = checkCords;
+   *  }
+   *
+   * distance( [ curCords, compCords ])
+   *
+   */
+  let distance = -1;
+  for ( let i = 0; i < data.length; i++ ) {
+    let curCords = data[ i ]; // [10, -9];
+    let compCords;
+    let latMin;
+    let latMax;
+    let longMin;
+    let longMax;
+    for ( let j = 0 + i; j < data.length; j++ ) {
+      checkCords = data[ j ]; // [8, -6];
+      if ( compCords === undefined ) {
+        compCords = checkCords;
+      } else {
+        // sort
+        // filter the rest
+        if ( curCords[ 0 ] >= compCords[ 0 ] ) { // lat comp
+          latMin = compCords[ 0 ];
+          latMax = curCords[ 0 ];
+        } else {
+          latMin = curCords[ 0 ];
+          latMax = compCords[ 0 ];
+        }
+        if ( curCords[ 1 ] >= compCords[ 1 ] ) {
+          longMin = compCords[ 1 ];
+          longMax = curCords[ 1 ];
+        } else {
+          longMin = curCords[ 1 ];
+          longMax = compCords[ 1 ];
+        }
+      }
+    }
+  }
+}
