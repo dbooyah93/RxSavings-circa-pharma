@@ -34,14 +34,16 @@ const variance = function ( data ) {
    * distance( [ curCords, compCords ])
    *
    */
-  let distance = -1;
+  let gap = -1;
+  let curCords;
+  let compCords;
+  let latMin;
+  let latMax;
+  let longMin;
+  let longMax;
   for ( let i = 0; i < data.length; i++ ) {
-    let curCords = data[ i ]; // [10, -9];
-    let compCords;
-    let latMin;
-    let latMax;
-    let longMin;
-    let longMax;
+    compCords = undefined;
+    curCords = data[ i ];  // [10, -9];
     for ( let j = 1 + i; j < data.length; j++ ) {
       checkCords = data[ j ]; // [8, -6];
       // set compCords
@@ -66,14 +68,24 @@ const variance = function ( data ) {
         // filter the rest
         if ( checkCords[ 0 ] > latMin && checkCords[ 0 ] < latMax && checkCords[ 1 ] > longMin && checkCords[ 1 ] < longMax ) {
           compCords = checkCords;
+          gap = -1;
         }
       }
     }
+    // find distance between these
+    if ( compCords !== undefined ) {
+      gaping = distance( [ curCords, compCords ] );
+      gap = gap < gaping ? gaping : gap;
+    }
   }
+  console.log( gap );
 }
 
 // both of these work
 // let test = [ [6, -9], [9, -6], [8, -8] ];
 // let test = [ [ 10, -9 ], [ 8, -6 ], [ 9, -7 ] ];
+// 0.25052082963298744 with the undefined
+// 0.26754894737225 sin the undefined
 
-variance( test );
+
+variance( dataHolder );
