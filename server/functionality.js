@@ -1,3 +1,5 @@
+const { session } = require('./dbConnection.js')
+
 const distance = function ( pharma, user ) {
   // finds the distance between two points on a grid
   // input should be [ [num, num], [num, num] ]
@@ -29,3 +31,24 @@ const filterClosest = function ( dbList, userLoc ) {
   }
   return closestPharma;
 }
+
+const search = function ( userLatitude, userLongitude ) {
+  // after a connection -> con.connect(...)
+  const variance = 0.25052082963298744; // based on utility function
+  let latRange = `${ userLatitude - variance } AND ${ userLatitude + variance }`;
+  let longRange = `${ userLongitude - variance } AND ${ userLongitude + variance }`;
+  let query = `SELECT * FROM pharmas WHERE latitude BETWEEN ${ latRange } AND longitude BETWEEN ${ longRange }`;
+  session.query( query, ( err, result, fields ) => {
+    if ( err ) {
+      console.log( `There was an ERROR ${ err }` );
+    } else {
+      return result;
+    }
+  })
+}
+
+const test = function ( ) {
+  console.log('test');
+}
+
+module.exports = { filterClosest, search, test };
