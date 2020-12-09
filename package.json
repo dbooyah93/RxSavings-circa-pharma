@@ -4,6 +4,7 @@
   "description": "Tech assessment for RxSavings",
   "main": "utilities.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "test"
   },
   "repository": {
