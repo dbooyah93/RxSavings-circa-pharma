@@ -15,5 +15,17 @@ const distance = function ( pharma, user ) {
 // console.log( distance( pharmaTest, userTest ))
 
 const filterClosest = function ( dbList, userLoc ) {
-
+  let gap = -1;
+  let closestPharma = [];
+  for ( let i = 0; i < dbList.length; i++ ) {
+    let measurement = distance( dbList[ i ], userLoc );
+    if ( gap <= measurement ) {
+      if ( gap < measurement ) {
+        closestPharma = [ dbList[ i ] ];
+        gap = measurement;
+      } else {
+        closestPharma.push( dbList[ i ] )
+      }
+    }
+  }
 }
