@@ -1,8 +1,6 @@
 const { pool } = require( './dbConnection.js' )
 const { getDistance } = require( 'geolib' );
 
-console.log( getDistance( { latitude: 39, longitude: -91 }, { latitude: 31, longitude: -80 } ) );
-
 const distance = function ( pharma, user ) {
   // finds the distance between two points on a grid
   // input should be [ [num, num], [num, num] ]
@@ -60,6 +58,10 @@ const search = function ( userLatitude, userLongitude, res ) {
     return filterClosest( results, [ userLatitude, userLongitude ]);
   })
   .then( ( result ) => {
+    let asTheBirdFlys = ( getDistance( { lat: userLatitude, lng: userLongitude }, result[0] ) ) / 1609 ;
+    for ( let i = 0; i < result.length; i++ ) {
+      result[ i ].miles = asTheBirdFlys;
+    }
     res.send( result );
   })
   .catch( ( err ) => {
