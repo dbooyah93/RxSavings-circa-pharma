@@ -1,7 +1,7 @@
 const { pool } = require( './dbConnection.js' )
 const { getDistance } = require( 'geolib' );
 
-const distance = function ( pharma, user ) {
+const measure = function ( pharma, user ) {
   // finds the distance between two points on a grid
   // input should be [ [num, num], [num, num] ]
     let pharmaAbs = [ Math.abs( pharma[ 0 ] ), Math.abs( pharma[ 1 ] ) ];
@@ -16,7 +16,7 @@ const filterClosest = function ( dbList, userLoc ) {
   let gap = Infinity;
   let closestPharma = [];
   for ( let i = 0; i < dbList.length; i++ ) {
-    let measurement = distance( [ dbList[ i ].latitude, dbList[ i ].longitude ], userLoc );
+    let measurement = measure( [ dbList[ i ].latitude, dbList[ i ].longitude ], userLoc );
     if ( gap >= measurement ) {
       if ( gap > measurement ) {
         closestPharma = [ dbList[ i ] ];
