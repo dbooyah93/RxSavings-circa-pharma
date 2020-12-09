@@ -8,11 +8,7 @@ app.use( express.json( { extended: true } ) );
 
 // end point looks like http://localhost:3000/api/loc/38/-91
 app.get('/api/loc/:latitude/:longitude', ( req, res ) => {
-  let result;
-  // implement func.search(lat, long)
-  // result = ^^^^^^^^^^^
   func.search( req.param( 'latitude' ), req.param( 'longitude' ), res );
-  // NEEDS res.send() TO EXECUTE PROPERLY
 })
 
 

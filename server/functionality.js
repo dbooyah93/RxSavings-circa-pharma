@@ -29,13 +29,10 @@ const filterClosest = function ( dbList, userLoc ) {
 }
 
 const search = function ( userLatitude, userLongitude, res ) {
-  // after a connection -> con.connect(...)
-  const variance = 0.25052082963298744 * 2; // based on utility function
+  const variance = 0.25052082963298744 * 2; // doesn't work without * 2 and that's undesired
   let latTemp = userLatitude;
   let longTemp = userLongitude;
 
-  // vvv this is perfect for unit testing. Test the for the possible inputs that fall within the variance
-  /** 38.81/-95.69, 38.81/-94.21, 39.19/-94.21, 39.19/-95.69 **/
   if ( userLatitude < 38.8 || userLatitude > 39.2 ) {
     userLatitude = userLatitude < 38.8 ? 38.8 : 39.2;
   }
@@ -44,7 +41,6 @@ const search = function ( userLatitude, userLongitude, res ) {
   }
   let latRange = `${ userLatitude - variance } AND ${ Number( userLatitude ) + variance }`;
   let longRange = `${ userLongitude - variance } AND ${ Number( userLongitude ) + variance }`;
-  // let query = `SELECT * FROM pharmas WHERE latitude BETWEEN 38.748 AND 39.2495 AND longitude BETWEEN -95.245 AND -94.748`;
   let query = `SELECT * FROM pharmas WHERE latitude BETWEEN ${ latRange } AND longitude BETWEEN ${ longRange }`;
   pool
   .then( ( conn ) => {
