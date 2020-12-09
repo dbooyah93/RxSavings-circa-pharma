@@ -11,10 +11,6 @@ const distance = function ( pharma, user ) {
     return c;
 }
 
-// let userTest = [ 8, -10 ];
-// let pharmaTest = [ 10, -10 ];
-
-// console.log( distance( pharmaTest, userTest ))
 const filterClosest = function ( dbList, userLoc ) {
   let gap = Infinity;
   let closestPharma = [];
