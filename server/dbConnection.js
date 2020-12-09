@@ -7,10 +7,15 @@ const session = mysql.createConnection({
   database: 'RxPharmas'
 })
 
-session.connect( ( err ) => {
+let query = `SELECT * FROM pharmas WHERE latitude BETWEEN 38 AND 39 AND longitude BETWEEN -95 AND -94`;
+console.log( session.query( query, ( err, results ) => {
   if ( err ) {
-    console.log( 'THERE WAS AN ERROR: ' + err );
-  } else {
-    console.log( 'connected' );
+    return err;
   }
-})
+  return results;
+}));
+
+
+module.exports = {
+  session
+}
