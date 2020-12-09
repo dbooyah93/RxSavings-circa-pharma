@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express()
+const func = require('./functionality.js')
 const PORT = 3000 // consider implementing an .evn file
 
 app.use( express.urlencoded() );
