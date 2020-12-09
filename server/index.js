@@ -6,7 +6,7 @@ app.use( express.urlencoded() );
 app.use( express.json() );
 
 app.get('/api/loc/:latitude/:longitude', ( req, res ) => {
-  res.send( );
+  res.send( 'okay' );
 })
 
 app.listen( PORT, () => {
