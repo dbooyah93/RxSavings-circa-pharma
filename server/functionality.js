@@ -34,6 +34,8 @@ const search = function ( userLatitude, userLongitude, res ) {
   let latTemp = userLatitude;
   let longTemp = userLongitude;
 
+  // vvv this is perfect for unit testing. Test the for the possible inputs that fall within the variance
+  /** 38.81/-95.69, 38.81/-94.21, 39.19/-94.21, 39.19/-95.69 **/
   if ( userLatitude < 38.8 || userLatitude > 39.2 ) {
     userLatitude = userLatitude < 38.8 ? 38.8 : 39.2;
   }
