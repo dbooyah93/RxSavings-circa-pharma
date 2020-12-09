@@ -1,4 +1,4 @@
-const { session } = require('./dbConnection.js')
+const { pool } = require('./dbConnection.js')
 
 const distance = function ( pharma, user ) {
   // finds the distance between two points on a grid
@@ -15,7 +15,7 @@ const filterClosest = function ( dbList, userLoc ) {
   let gap = Infinity;
   let closestPharma = [];
   for ( let i = 0; i < dbList.length; i++ ) {
-    let measurement = distance( dbList[ i ], userLoc );
+    let measurement = distance( [ dbList[ i ].latitude, dbList[ i ].longitude ], userLoc );
     if ( gap >= measurement ) {
       if ( gap > measurement ) {
         closestPharma = [ dbList[ i ] ];
@@ -28,19 +28,40 @@ const filterClosest = function ( dbList, userLoc ) {
   return closestPharma;
 }
 
-const search = function ( userLatitude, userLongitude ) {
+const search = function ( userLatitude, userLongitude, res ) {
   // after a connection -> con.connect(...)
-  const variance = 0.25052082963298744; // based on utility function
-  let latRange = `${ userLatitude - variance } AND ${ userLatitude + variance }`;
-  let longRange = `${ userLongitude - variance } AND ${ userLongitude + variance }`;
+  const variance = 0.25052082963298744 * 2; // based on utility function
+  let latTemp = userLatitude;
+  let longTemp = userLongitude;
+
+  if ( userLatitude < 38.8 || userLatitude > 39.2 ) {
+    userLatitude = userLatitude < 38.8 ? 38.8 : 39.2;
+  }
+  if ( userLongitude < -95.7 || userLongitude > -94.2 ) {
+    userLongitude = userLongitude < -95.7 ? -95.7 : -94.2;
+  }
+  let latRange = `${ userLatitude - variance } AND ${ Number( userLatitude ) + variance }`;
+  let longRange = `${ userLongitude - variance } AND ${ Number( userLongitude ) + variance }`;
+  // let query = `SELECT * FROM pharmas WHERE latitude BETWEEN 38.748 AND 39.2495 AND longitude BETWEEN -95.245 AND -94.748`;
   let query = `SELECT * FROM pharmas WHERE latitude BETWEEN ${ latRange } AND longitude BETWEEN ${ longRange }`;
-  session.query( query, ( err, result, fields ) => {
-    if ( err ) {
-      console.log( `There was an ERROR ${ err }` );
-    } else {
-      return result;
-    }
+  pool
+  .then( ( conn ) => {
+    return conn.getConnection()
   })
+  .then( ( conn ) => {
+    return conn.query( query )
+  })
+  .then( ( results ) => {
+    userLatitude = latTemp;
+    userLongitude = longTemp;
+    return filterClosest( results, [ userLatitude, userLongitude ]);
+  })
+  .then( ( result ) => {
+    res.send( result );
+  })
+  .catch( ( err ) => {
+    res.send( 'Error with search. Contact admin.' )
+  });
 }
 
 const test = function ( ) {
