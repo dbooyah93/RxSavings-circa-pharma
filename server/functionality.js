@@ -1,4 +1,7 @@
-const { pool } = require('./dbConnection.js')
+const { pool } = require( './dbConnection.js' )
+const { getDistance } = require( 'geolib' );
+
+console.log( getDistance( { latitude: 39, longitude: -91 }, { latitude: 31, longitude: -80 } ) );
 
 const distance = function ( pharma, user ) {
   // finds the distance between two points on a grid
@@ -27,6 +30,8 @@ const filterClosest = function ( dbList, userLoc ) {
   }
   return closestPharma;
 }
+
+
 
 const search = function ( userLatitude, userLongitude, res ) {
   const variance = 0.25052082963298744 * 2; // doesn't work without * 2 and that's undesired
