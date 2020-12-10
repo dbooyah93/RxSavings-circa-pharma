@@ -1,8 +1,8 @@
 # Pharma-Find(API)
 
-This repo contains a CSV to seed a MySQL database with. Feel free to seed your MySQL database with your own csv containing at least a latitude and longitude coloumn.
+  This repo contains a CSV to seed a MySQL database with. Feel free to seed your MySQL database with your own csv containing at least a latitude and longitude coloumn.
 
-The repo will act as an API to return the closest in-network pharmacy based on input cordinates.
+  The repo will act as an API to return the closest in-network pharmacy based on input cordinates.
 
 
 ---
@@ -57,7 +57,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 ---
 
 ### Demo
-This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatitude}/${userLongitude}` and respond with the closest in-network pharmacy as an object within an array which will look like:
+  This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatitude}/${userLongitude}` and respond with the closest in-network pharmacy as an object within an array which will look like:
 
 ```js
 [
@@ -75,7 +75,7 @@ This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatit
 ]
 ```
 <br/>
-Postman GET request to latitude 38 longitude -91
+  Postman GET request to latitude 38 longitude -91
 
 ![postman_test](pictures/withinRange.png/)
 
@@ -92,9 +92,9 @@ Postman GET request to latitude 38 longitude -91
 
 ### Special Efforts
 
-The biggest time sinks were devising how to parse out information from the Database in an efficient manner, setting up the `search` method in `functionality.js` because of the API call within the async chain, and utilizing the third party api MapBox. <br/>
+  The biggest time sinks were devising how to parse out information from the Database in an efficient manner, setting up the `search` method in `functionality.js` because of the API call within the async chain, and utilizing the third party api MapBox. <br/>
 
-Parsing information from the database the way I did prevents the database from sorting for the closest pharma and instead grabs a range that javascript could parse faster and with less load on a database that could serve other clients. <br/>
+  Parsing information from the database the way I did prevents the database from sorting for the closest pharma and instead grabs a range that javascript could parse faster and with less load on a database that could serve other clients. <br/>
 
 `search()` grew past the origonal functionality planned for it when an API call to MapBox was added. At the API call the object to be sent to the client was ready sans milage. The solution was to call a variable before the chain and assign it the pharmacy object, then alter with milage. <br/>
 
