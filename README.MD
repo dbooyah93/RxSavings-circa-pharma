@@ -125,6 +125,6 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ### Whiteboarding
 
-I spent easily half of my time here
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I spent easily half of my time here
 ![whiteboard](pictures/whiteboard.png/)
 
