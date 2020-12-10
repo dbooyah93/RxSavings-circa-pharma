@@ -74,17 +74,36 @@ This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatit
     }
 ]
 ```
+<br/>
+Postman GET request to latitude 38 longitude -91
 
 ![postman_test](pictures/withinRange.png/)
 
 ---
 
-Technologies Used
+### Dependencies
+* axios
+* dotenv
+* express
+* mysql
+* promise-mysql
 
 ---
 
-Special Gotchase ( problmes faced, or unique elements )
+### Special Efforts
+
+The biggest time sinks were devising how to parse out information from the Database in an efficient manner, setting up the `search` method in `functionality.js` because of the API call within the async chain, and utilizing the third party api MapBox. <br/>
+
+Parsing information from the database the way I did prevents the database from sorting for the closest pharma and instead grabs a range that javascript could parse faster and with less load on a database that could serve other clients. <br/>
+
+`search()` grew past the origonal functionality planned for it when an API call to MapBox was added. At the API call the object to be sent to the client was ready sans milage. The solution was to call a variable before the chain and assign it the pharmacy object, then alter with milage. <br/>
+
+MapBox turned out to be the easier to use maping service alternative to Google Maps. Their API call seems non standared regaurding coordinates. Their API neccessitates longitude, latitude as aposed to atitude, longitude. Neither API was super user friendly, but time spent with MapBox was a better investment than with Google.
 
 ---
 
-Technical Description ( installation, setup, how to contribute )
+### Testing
+
+Mocah and Chai are the testing libraries for this repo. They are devDependencies and wont be installed with the `npm install` command.<br/>
+
+The API calls were not tested because this is a Tech assessment and the time spent organizing those test seemed less important than turning this assessment in ASAP. Setting up the Chai API testing library would be installed next. Then it would be implemented to test the API / `search()`. `search()` was tested while it was being built, but with it's call to Mapbox and primary function to serve the RxPharma API testing it with the current libraries is not possible.
