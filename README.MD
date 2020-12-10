@@ -45,6 +45,7 @@ You should be out of MySQL and back in your root folder in the CLI
 1. Run `npm install`
 1. Observe the `.env` file that was created
 1. Please include the following in the .env file based on the MySQL settings you chose.<br/>
+  Remove any carats `<` | `>` and insert your own settings. Local host can stay if you are running this on your own machine. Otherwise you'll need your instances ip address.<br/>
 ```js
 DB_HOST=<localhost>
 DB_USER=< user name created in mysql >
@@ -55,7 +56,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ---
 
-Demo
+### Demo
 This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatitude}/${userLongitude}` and respond with the closest in-network pharmacy as an object within an array which will look like:
 
 ```js
