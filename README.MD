@@ -23,18 +23,18 @@ The repo will act as an API to return the closest in-network pharmacy based on i
 1. Enter your administrative password
 `* Starting MySQL database server mysqld`
 1. sudo mysql
-- We do this to have maximum permission to freely set up mysql for the repo access
-- Save your decisions in a secure location because you will set up an .env file shortly
+We do this to have maximum permission to freely set up mysql for the repo access
+Save your decisions in a secure location because you will set up an .env file shortly
 1. `CREATE DATABASE <databasename>;`
 1. `USE <databasename>;`
 1. `CREATE USER '<user>'@localhost IDENTIFIED BY '<userpassword>';`
-- More info and specifics on user creaion [here](https://dev.mysql.com/doc/refman/8.0/en/create-user.html).
+More info and specifics on user creaion [here](https://dev.mysql.com/doc/refman/8.0/en/create-user.html).
 1. `GRANT SELECT ON <databasename> TO '<user>'@localhost;`
-- More info and specifics on permssions [here](https://dev.mysql.com/doc/refman/8.0/en/grant.html).
+More info and specifics on permssions [here](https://dev.mysql.com/doc/refman/8.0/en/grant.html).
 1. `FLUSH PRIVILEGES;`
-- More info on FLUSHING [here](https://www.interserver.net/tips/kb/mysql-flush-commands/#:~:text=mysql%3E%20FLUSH%20PRIVILEGES%3B,reloading%20or%20restarting%20mysql%20service.).
+More info on FLUSHING [here](https://www.interserver.net/tips/kb/mysql-flush-commands/#:~:text=mysql%3E%20FLUSH%20PRIVILEGES%3B,reloading%20or%20restarting%20mysql%20service.).
 1. CTRL + Z
-- You should be out of MySQL and back in your repo in the CLI
+You should be out of MySQL and back in your repo in the CLI
 1. `sudo service mysql restart`
 
 
