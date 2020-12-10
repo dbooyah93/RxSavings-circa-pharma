@@ -44,19 +44,3 @@ describe( `filterClosest`, () => {
     done();
   })
 });
-
-describe( `search`, () => {
-  let pharmaObj;
-  let res = {
-    send: function ( foundPharma ) {
-      pharmaObj = foundPharma;
-    }
-  }
-  before( () => {
-    func.search( 38, -91, res );
-  })
-  it(`Should return pharmacy object with the distance along a route in miles`, ( done ) => {
-    expect( pharmaObj ).to.equal( {} );
-    done();
-  })
-});
