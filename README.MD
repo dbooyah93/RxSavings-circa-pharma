@@ -1,8 +1,8 @@
 # Pharma-Find(API)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This repo contains a CSV to seed a MySQL database with. Feel free to seed your MySQL database with your own csv containing at least a latitude and longitude coloumn.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This repo contains a CSV to seed a MySQL database with. Feel free to seed your MySQL database with your own csv containing at least a latitude and longitude column.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The repo will act as an API to return the closest in-network pharmacy based on input cordinates.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The repo will act as an API to return the closest in-network pharmacy based on input coordinates.
 
 
 ---
@@ -28,9 +28,9 @@
 1. `CREATE DATABASE <databasename>;`
 1. `USE <databasename>;`
 1. `CREATE USER '<user>'@localhost IDENTIFIED BY '<userpassword>';`<br/>
-&nbsp;&nbsp;More info and specifics on user creaion [here](https://dev.mysql.com/doc/refman/8.0/en/create-user.html).
+&nbsp;&nbsp;More info and specifics on user creation [here](https://dev.mysql.com/doc/refman/8.0/en/create-user.html).
 1. `GRANT SELECT ON <databasename> TO '<user>'@localhost;`<br/>
-&nbsp;&nbsp;More info and specifics on permssions [here](https://dev.mysql.com/doc/refman/8.0/en/grant.html).
+&nbsp;&nbsp;More info and specifics on permissions [here](https://dev.mysql.com/doc/refman/8.0/en/grant.html).
 1. `FLUSH PRIVILEGES;`<br/>
 &nbsp;&nbsp;More info on FLUSHING [here](https://www.interserver.net/tips/kb/mysql-flush-commands/#:~:text=mysql%3E%20FLUSH%20PRIVILEGES%3B,reloading%20or%20restarting%20mysql%20service.).
 1. CTRL + Z<br/>
@@ -96,14 +96,14 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parsing information from the database the way I did prevents the database from sorting for the closest pharma and instead grabs a range that javascript could parse faster and with less load on a database that could serve other clients. <br/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`search()` grew past the origonal functionality planned for it when an API call to MapBox was added. At the API call the object to be sent to the client was ready sans milage. The solution was to call a variable before the chain and assign it the pharmacy object, then alter with milage. <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`search()` grew past the original functionality planned for it when an API call to MapBox was added. At the API call the object to be sent to the client was ready sans milage. The solution was to call a variable before the chain and assign it the pharmacy object, then alter with mileage. <br/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MapBox turned out to be the easier to use maping service alternative to Google Maps. Their API call seems non standared regaurding coordinates. Their API neccessitates longitude, latitude as aposed to atitude, longitude. Neither API was super user friendly, but time spent with MapBox was a better investment than with Google.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MapBox turned out to be the easier to use mapping service alternative to Google Maps. Their API call seems non standard regarding coordinates. Their API necessitates longitude, latitude as opposed to altitude, longitude. Neither API was super user friendly, but time spent with MapBox was a better investment than with Google.
 
 ---
 
 ### Testing
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mocah and Chai are the testing libraries for this repo. They are devDependencies and wont be installed with the `npm install` command.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mocha and Chai are the testing libraries for this repo. They are devDependencies and wont be installed with the `npm install` command.<br/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The API calls were not tested because this is a Tech assessment and the time spent organizing those test seemed less important than turning this assessment in ASAP. Setting up the Chai API testing library would be installed next. Then it would be implemented to test the API / `search()`. `search()` was tested while it was being built, but with it's call to Mapbox and primary function to serve the RxPharma API testing it with the current libraries is not possible.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The API calls were not tested because this is a Tech assessment and the time spent organizing those tests seemed less important than turning this assessment in ASAP. Setting up the Chai API testing library would be installed next. Then it would be implemented to test the API / `search()`. `search()` was tested while it was being built, but with it's call to Mapbox and primary function to serve the RxPharma API testing it with the current libraries is not possible.
