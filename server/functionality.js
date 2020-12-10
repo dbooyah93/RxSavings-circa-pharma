@@ -2,9 +2,6 @@ const { pool } = require( './dbConnection.js' )
 const axios = require( 'axios' );
 
 const measure = function ( pharma, user ) {
-  // finds the distance between two points on a grid
-  // input should be () [num, num], [num, num] )
-
     let pharmaAbs = [ Math.abs( pharma[ 0 ] ), Math.abs( pharma[ 1 ] ) ];
     let userAbs = [ Math.abs( user[ 0 ] ), Math.abs( user[ 1 ] ) ];
     let a = Math.abs( pharmaAbs[ 0 ] - userAbs[ 0 ] );
@@ -13,7 +10,6 @@ const measure = function ( pharma, user ) {
     return c;
 }
 
-// let url = 'https://api.mapbox.com/directions/v5/mapbox/driving/-95.1216,39.5631;-94.6268,39.1155?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoiZGJvb3lhaDkzIiwiYSI6ImNraWkwa2J2azA2MG0ycXA0azVsbnkzNjgifQ.jDImp9lKdtOuoqM9jNtOwQ';
 
 const pathFinder = ( userLng, userLat, pharmaLng, pharmaLat ) => {
   let APIKEY = 'pk.eyJ1IjoiZGJvb3lhaDkzIiwiYSI6ImNraWkwa2J2azA2MG0ycXA0azVsbnkzNjgifQ.jDImp9lKdtOuoqM9jNtOwQ'
@@ -41,7 +37,7 @@ const filterClosest = function ( dbList, userLoc ) {
 
 
 const search = function ( userLatitude, userLongitude, res ) {
-  const variance = 0.25052082963298744 * 2; // doesn't work without * 2 and that's undesired
+  const variance = 0.25052082963298744 * 2;
   let latTemp = userLatitude;
   let longTemp = userLongitude;
   let closestPharma;
@@ -60,13 +56,13 @@ const search = function ( userLatitude, userLongitude, res ) {
     return conn.getConnection()
   })
   .then( ( conn ) => {
-    return conn.query( query ) // async finds list of pharmas
+    return conn.query( query )
   })
   .then( ( results ) => {
     userLatitude = latTemp;
     userLongitude = longTemp;
-    closestPharma = filterClosest( results, [ userLatitude, userLongitude ]);// returns object with the pharmacy information not async
-    return pathFinder( userLongitude, userLatitude, closestPharma[0].longitude, closestPharma[0].latitude )// finds distance in km
+    closestPharma = filterClosest( results, [ userLatitude, userLongitude ]);
+    return pathFinder( userLongitude, userLatitude, closestPharma[0].longitude, closestPharma[0].latitude )
   })
   .then ( ( response ) => {
     let fastest;
@@ -83,8 +79,6 @@ const search = function ( userLatitude, userLongitude, res ) {
   .then( ( closestPharma ) => {
     res.send( closestPharma )
   })
-    // ( userLongitude, userLatitude, result[0].longitude, result[0].latitude )
-    // let distance = ( getDistance( { lat: userLatitude, lng: userLongitude }, result[0] ) ) / 1609
   .catch( ( err ) => {
     res.send( 'Error with search. Contact admin.' )
   });
