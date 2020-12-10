@@ -107,3 +107,9 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mocha and Chai are the testing libraries for this repo. They are devDependencies and wont be installed with the `npm install` command.<br/>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The API calls were not tested because this is a Tech assessment and the time spent organizing those tests seemed less important than turning this assessment in ASAP. Setting up the Chai API testing library would be installed next. Then it would be implemented to test the API / `search()`. `search()` was tested while it was being built, but with it's call to Mapbox and primary function to serve the RxPharma API testing it with the current libraries is not possible.
+---
+### Whiteboarding
+
+I spent easily half of my time here
+![whiteboard](pictures/whiteboard.png/)
+
