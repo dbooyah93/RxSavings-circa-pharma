@@ -42,12 +42,22 @@ You should be out of MySQL and back in your root folder in the CLI
 
 1. In the CLI `git clone YOUR-GITHUB-FORK`
 1. Navigate your CLI to the "RxSavings-circa-pharma" file
-1.
+1. Run `npm install`
+1. Observe the `.env` file that was created
+1. Please include the following in the .env file based on the MySQL settings you chose.<br/>
+```js
+DB_HOST=<localhost>
+DB_USER=< user name created in mysql >
+DB_PASS=< the above user's password >
+DB_DATABASE=< the database name >
+PORT=< the port you want to use [DEFAULT IS 3000] >
+```
 
 ---
 
 Demo
 This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatitude}/${userLongitude}` and respond with the closest in-network pharmacy as an object within an array which will look like:
+
 ```js
 [
     {
