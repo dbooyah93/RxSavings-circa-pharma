@@ -3,7 +3,7 @@ const axios = require( 'axios' );
 
 const measure = function ( pharma, user ) {
   // finds the distance between two points on a grid
-  // input should be [ [num, num], [num, num] ]
+  // input should be () [num, num], [num, num] )
 
     let pharmaAbs = [ Math.abs( pharma[ 0 ] ), Math.abs( pharma[ 1 ] ) ];
     let userAbs = [ Math.abs( user[ 0 ] ), Math.abs( user[ 1 ] ) ];
@@ -94,4 +94,4 @@ const test = function ( ) {
   console.log('test');
 }
 
-module.exports = { filterClosest, search, test };
+module.exports = { filterClosest, search, measure, test };
