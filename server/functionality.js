@@ -1,9 +1,10 @@
 const { pool } = require( './dbConnection.js' )
-const { getDistance } = require( 'geolib' );
+const axios = require( 'axios' );
 
 const measure = function ( pharma, user ) {
   // finds the distance between two points on a grid
   // input should be [ [num, num], [num, num] ]
+
     let pharmaAbs = [ Math.abs( pharma[ 0 ] ), Math.abs( pharma[ 1 ] ) ];
     let userAbs = [ Math.abs( user[ 0 ] ), Math.abs( user[ 1 ] ) ];
     let a = Math.abs( pharmaAbs[ 0 ] - userAbs[ 0 ] );
@@ -11,6 +12,14 @@ const measure = function ( pharma, user ) {
     let c = Math.sqrt( ( a * a ) + ( b * b ) );
     return c;
 }
+
+// let url = 'https://api.mapbox.com/directions/v5/mapbox/driving/-95.1216,39.5631;-94.6268,39.1155?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoiZGJvb3lhaDkzIiwiYSI6ImNraWkwa2J2azA2MG0ycXA0azVsbnkzNjgifQ.jDImp9lKdtOuoqM9jNtOwQ';
+
+const pathFinder = ( userLng, userLat, pharmaLng, pharmaLat ) => {
+  let APIKEY = 'pk.eyJ1IjoiZGJvb3lhaDkzIiwiYSI6ImNraWkwa2J2azA2MG0ycXA0azVsbnkzNjgifQ.jDImp9lKdtOuoqM9jNtOwQ'
+  let url = `https://api.mapbox.com/directions/v5/mapbox/driving/${userLng},${userLat};${pharmaLng},${pharmaLat}?alternatives=true&geometries=geojson&steps=true&access_token=${APIKEY}`;
+  return axios.get( url );
+  }
 
 const filterClosest = function ( dbList, userLoc ) {
   let gap = Infinity;
@@ -35,6 +44,7 @@ const search = function ( userLatitude, userLongitude, res ) {
   const variance = 0.25052082963298744 * 2; // doesn't work without * 2 and that's undesired
   let latTemp = userLatitude;
   let longTemp = userLongitude;
+  let closestPharma;
 
   if ( userLatitude < 38.8 || userLatitude > 39.2 ) {
     userLatitude = userLatitude < 38.8 ? 38.8 : 39.2;
@@ -50,20 +60,31 @@ const search = function ( userLatitude, userLongitude, res ) {
     return conn.getConnection()
   })
   .then( ( conn ) => {
-    return conn.query( query )
+    return conn.query( query ) // async finds list of pharmas
   })
   .then( ( results ) => {
     userLatitude = latTemp;
     userLongitude = longTemp;
-    return filterClosest( results, [ userLatitude, userLongitude ]);
+    closestPharma = filterClosest( results, [ userLatitude, userLongitude ]);// returns object with the pharmacy information not async
+    return pathFinder( userLongitude, userLatitude, closestPharma[0].longitude, closestPharma[0].latitude )// finds distance in km
   })
-  .then( ( result ) => {
-    let asTheBirdFlys = ( getDistance( { lat: userLatitude, lng: userLongitude }, result[0] ) ) / 1609 ;
-    for ( let i = 0; i < result.length; i++ ) {
-      result[ i ].miles = asTheBirdFlys;
+  .then ( ( response ) => {
+    let fastest;
+    let routes = response.data.routes;
+    for ( let i = 0; i < routes.length; i++ ) {
+      if ( fastest === undefined || fastest < routes[ i ].distance ) {
+        fastest = routes[ i ].distance;
+      }
     }
-    res.send( result );
+    fastest = fastest / 1609;
+    closestPharma[0].miles = fastest;
+    return closestPharma;
   })
+  .then( ( closestPharma ) => {
+    res.send( closestPharma )
+  })
+    // ( userLongitude, userLatitude, result[0].longitude, result[0].latitude )
+    // let distance = ( getDistance( { lat: userLatitude, lng: userLongitude }, result[0] ) ) / 1609
   .catch( ( err ) => {
     res.send( 'Error with search. Contact admin.' )
   });
