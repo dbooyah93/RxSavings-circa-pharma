@@ -34,15 +34,15 @@ More info and specifics on permssions [here](https://dev.mysql.com/doc/refman/8.
 1. `FLUSH PRIVILEGES;`
 More info on FLUSHING [here](https://www.interserver.net/tips/kb/mysql-flush-commands/#:~:text=mysql%3E%20FLUSH%20PRIVILEGES%3B,reloading%20or%20restarting%20mysql%20service.).
 1. CTRL + Z
-You should be out of MySQL and back in your repo in the CLI
+You should be out of MySQL and back in your root folder in the CLI
 1. `sudo service mysql restart`
 
 
 ### Initialization
 
-l. In the CLI `git clone YOUR-GITHUB-FORK`
-l. Navigate your CLI to the "RxSavings-circa-pharma" file
-l.
+1. In the CLI `git clone YOUR-GITHUB-FORK`
+1. Navigate your CLI to the "RxSavings-circa-pharma" file
+1.
 
 ---
 
