@@ -14,8 +14,7 @@
   "keywords": [
     "API",
     "backend",
-    "tech",
-    "assessment"
+    "tech-assessment"
   ],
   "author": "David Boyea",
   "license": "ISC",
@@ -24,8 +23,8 @@
   },
   "homepage": "https://github.com/dbooyah93/RxSavings-circa-pharma#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "express": "^4.17.1",
-    "geolib": "^3.3.1",
     "mysql": "^2.18.1",
     "promise-mysql": "^5.0.0"
   }
