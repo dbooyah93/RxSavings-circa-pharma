@@ -19,24 +19,30 @@ The repo will act as an API to return the closest in-network pharmacy based on i
 ### Setting up MySQL
 
 1. Open your terminal and run the following commands
-1. `sudo service mysql start`
-1. Enter your administrative password
+2. `sudo service mysql start`
+3. Enter your administrative password
 
   `* Starting MySQL database server mysqld`
-1. sudo mysql
+4. sudo mysql
+
   We do this to have maximum permission to freely set up mysql for the repo access
+
   Save your decisions in a secure location because you will set up an .env file shortly
-1. `CREATE DATABASE <databasename>;`
-1. `USE <databasename>;`
-1. `CREATE USER '<user>'@localhost IDENTIFIED BY '<userpassword>';`
+5. `CREATE DATABASE <databasename>;`
+6. `USE <databasename>;`
+7. `CREATE USER '<user>'@localhost IDENTIFIED BY '<userpassword>';`
+
   More info and specifics on user creaion [here](https://dev.mysql.com/doc/refman/8.0/en/create-user.html).
-1. `GRANT SELECT ON <databasename> TO '<user>'@localhost;`
+8. `GRANT SELECT ON <databasename> TO '<user>'@localhost;`
+
   More info and specifics on permssions [here](https://dev.mysql.com/doc/refman/8.0/en/grant.html).
-1. `FLUSH PRIVILEGES;`
+9. `FLUSH PRIVILEGES;`
+
   More info on FLUSHING [here](https://www.interserver.net/tips/kb/mysql-flush-commands/#:~:text=mysql%3E%20FLUSH%20PRIVILEGES%3B,reloading%20or%20restarting%20mysql%20service.).
-1. CTRL + Z
+10. CTRL + Z
+
   You should be out of MySQL and back in your root folder in the CLI
-1. `sudo service mysql restart`
+11. `sudo service mysql restart`
 
 
 ### Initialization
