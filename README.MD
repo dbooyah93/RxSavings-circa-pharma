@@ -33,6 +33,19 @@
 &nbsp;&nbsp;More info and specifics on permissions [here](https://dev.mysql.com/doc/refman/8.0/en/grant.html).
 1. `FLUSH PRIVILEGES;`<br/>
 &nbsp;&nbsp;More info on FLUSHING [here](https://www.interserver.net/tips/kb/mysql-flush-commands/#:~:text=mysql%3E%20FLUSH%20PRIVILEGES%3B,reloading%20or%20restarting%20mysql%20service.).
+1. Arrows are representational of returns, or hitting the enter key on your keyboard<br/>
+```js
+CREATE TABLE pharmas (
+    -> id INT NOT NULL AUTO_INCREMENT,
+    -> name VARCHAR(255) NOT NULL,
+    -> address VARCHAR(255) NOT NULL,
+    -> city VARCHAR(255) NOT NULL,
+    -> state VARCHAR(255) NOT NULL,
+    -> zip INT NOT NULL,
+    -> latitude DECIMAL(11,8),
+    -> longitude DECIMAL(11,8),
+    -> PRIMARY KEY (id));
+```
 1. CTRL + Z<br/>
 &nbsp;&nbsp;You should be out of MySQL and back in your root folder in the CLI
 1. `sudo service mysql restart`
