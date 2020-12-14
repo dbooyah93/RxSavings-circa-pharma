@@ -46,9 +46,9 @@ CREATE TABLE pharmas (
     -> longitude DECIMAL(11,8),
     -> PRIMARY KEY (id));
 ```
-1. CTRL + Z<br/>
+11. CTRL + Z<br/>
 &nbsp;&nbsp;You should be out of MySQL and back in your root folder in the CLI
-1. `sudo service mysql restart`
+12. `sudo service mysql restart`
 
 
 ### Initialization
