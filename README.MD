@@ -69,7 +69,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ---
 
-### Demo
+## Demo
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This API will allow `GET` requests to `http://localhost:3000/api/loc/${userLatitude}/${userLongitude}` and respond with the closest in-network pharmacy as an object within an array which will look like:
 
 ```js
@@ -94,7 +94,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ---
 
-### Dependencies
+## Dependencies
 * axios
 * dotenv
 * express
@@ -103,7 +103,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ---
 
-### Special Efforts
+## Special Efforts
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The biggest time sinks were devising how to parse out information from the Database in an efficient manner, setting up the `search` method in `functionality.js` because of the API call within the async chain, and utilizing the third party api MapBox. <br/>
 
@@ -115,7 +115,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ---
 
-### Testing
+## Testing
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mocha and Chai are the testing libraries for this repo. They are devDependencies and wont be installed with the `npm install` command.<br/>
 
@@ -123,7 +123,7 @@ PORT=< the port you want to use [DEFAULT IS 3000] >
 
 ---
 
-### Whiteboarding
+## Whiteboarding
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I spent easily half of my time here
 ![whiteboard](pictures/whiteboard.png/)
