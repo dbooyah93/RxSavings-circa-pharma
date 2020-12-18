@@ -1,4 +1,5 @@
 const { pool } = require( './dbConnection.js' )
+const dotenv = require('dotenv').config();
 const axios = require( 'axios' );
 
 const measure = function ( pharma, user ) {
@@ -12,7 +13,7 @@ const measure = function ( pharma, user ) {
 
 
 const pathFinder = ( userLng, userLat, pharmaLng, pharmaLat ) => {
-  let APIKEY = 'pk.eyJ1IjoiZGJvb3lhaDkzIiwiYSI6ImNraWkwa2J2azA2MG0ycXA0azVsbnkzNjgifQ.jDImp9lKdtOuoqM9jNtOwQ'
+  let APIKEY = process.env.API_KEY;
   let url = `https://api.mapbox.com/directions/v5/mapbox/driving/${userLng},${userLat};${pharmaLng},${pharmaLat}?alternatives=true&geometries=geojson&steps=true&access_token=${APIKEY}`;
   return axios.get( url );
   }
